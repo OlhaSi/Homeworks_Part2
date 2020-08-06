@@ -6,7 +6,7 @@ package com.telran;
  * @param <T>
  */
 
-public interface OurDeque<T> {
+public interface OurDeque<T> extends Iterable<T> {
 
     void addLast(T el);
 
