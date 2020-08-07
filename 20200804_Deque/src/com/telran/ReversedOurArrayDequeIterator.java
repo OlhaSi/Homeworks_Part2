@@ -9,6 +9,7 @@ public class ReversedOurArrayDequeIterator<T> implements Iterator<T> {
 
     public ReversedOurArrayDequeIterator(OurArrayDeque<T> toIterate) {
         this.toIterate = toIterate;
+        currentIndexNumber = toIterate.size;
     }
 
 

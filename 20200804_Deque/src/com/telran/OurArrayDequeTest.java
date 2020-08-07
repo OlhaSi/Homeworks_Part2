@@ -213,18 +213,18 @@ class OurArrayDequeTest {
     public void testIterator(){
         ourArrayDeque = new OurArrayDeque<>(2);
 
-        ourArrayDeque.addLast(3);
         ourArrayDeque.addFirst(8);
-
-        Iterator<Integer> it = new ReversedOurArrayDequeIterator<>(ourArrayDeque);
+        ourArrayDeque.addLast(3);
 
         List<Integer> result = new ArrayList<>();
+        List<Integer> expected = Arrays.asList(3,8);
+
+        Iterator<Integer> it = new ReversedOurArrayDequeIterator<>(ourArrayDeque);
         while(it.hasNext()){
             int current = it.next();
             result.add(current);
         }
 
-        List<Integer> expected = Arrays.asList(8, 3);
         assertEquals(expected, result);
     }
 
