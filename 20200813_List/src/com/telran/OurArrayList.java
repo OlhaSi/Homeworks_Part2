@@ -18,12 +18,11 @@ import java.util.Iterator;
 public class OurArrayList<T> implements OurList<T> {
 
     Object[] source;
-    int capacity;
+    final int DEFAULT_CAPACITY = 16;
     int size;
 
-    public OurArrayList(int capacity) {
-        this.source = new Object[capacity];
-        this.capacity = 16;
+    public OurArrayList() {
+        this.source = new Object[DEFAULT_CAPACITY];
     }
 
     private void ensureCapacity() {
@@ -33,7 +32,7 @@ public class OurArrayList<T> implements OurList<T> {
 
     @Override
     public void add(T elt) {
-        if (size == capacity)
+        if (size == source.length)
             ensureCapacity();
 
         source[size] = elt;
@@ -47,7 +46,10 @@ public class OurArrayList<T> implements OurList<T> {
 
     @Override
     public void set(int index, T elt) {
-
+        if(index >= size || index < 0)
+            throw new IndexOutOfBoundsException();
+        else
+            source[index] = elt;
     }
 
     @Override
@@ -60,16 +62,34 @@ public class OurArrayList<T> implements OurList<T> {
 
     @Override
     public boolean contains(T elt) {
+        for (int i = 0; i < size; i++) {
+            if(source[i] == elt)
+                return true;
+        }
         return false;
     }
 
     @Override
     public T remove(int index) {
-        return null;
+        if(index >= size || index < 0)
+            throw new IndexOutOfBoundsException();
+
+        T result = (T) source[index];
+        source = Arrays.copyOf(source, size - index -1);
+        size--;
+
+        return result;
     }
 
     @Override
     public boolean remove(T elt) {
+        for (int i = 0; i < size; i++) {
+            if(source[i] == elt) {
+                source = Arrays.copyOf(source, size - i - 1);
+                size--;
+                return true;
+            }
+        }
         return false;
     }
 
