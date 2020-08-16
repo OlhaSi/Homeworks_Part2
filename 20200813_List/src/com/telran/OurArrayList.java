@@ -1,9 +1,6 @@
 package com.telran;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * An implementation of the list data structure,
@@ -23,6 +20,7 @@ public class OurArrayList<T> implements OurList<T> {
 
     public OurArrayList() {
         this.source = new Object[DEFAULT_CAPACITY];
+        size = 0;
     }
 
     private void ensureCapacity() {
@@ -48,8 +46,8 @@ public class OurArrayList<T> implements OurList<T> {
     public void set(int index, T elt) {
         if(index >= size || index < 0)
             throw new IndexOutOfBoundsException();
-        else
-            source[index] = elt;
+
+        source[index] = elt;
     }
 
     @Override
@@ -62,11 +60,25 @@ public class OurArrayList<T> implements OurList<T> {
 
     @Override
     public boolean contains(T elt) {
+        int index = getIndex(elt);
+        return index != -1;
+    }
+
+//    @Override
+//    public boolean contains(T elt) {
+//        for (int i = 0; i < size; i++) {
+//            if(source[i].equals(elt));
+//                return true;
+//        }
+//        return false;
+//    }
+
+    private int getIndex(T elt){
         for (int i = 0; i < size; i++) {
-            if(source[i] == elt)
-                return true;
+            if(elt.equals(source[i]))
+                return i;
         }
-        return false;
+        return -1;
     }
 
     @Override
@@ -83,28 +95,71 @@ public class OurArrayList<T> implements OurList<T> {
 
     @Override
     public boolean remove(T elt) {
-        for (int i = 0; i < size; i++) {
-            if(source[i] == elt) {
-                source = Arrays.copyOf(source, size - i - 1);
-                size--;
-                return true;
-            }
-        }
-        return false;
+        int index = getIndex(elt);
+
+        if(index == -1)
+            return false;
+
+        remove(index);
+        return true;
     }
+
+//    @Override
+//    public boolean remove(T elt) {
+//        for (int i = 0; i < size; i++) {
+//            if(source[i].equals(elt)) {
+//                source = Arrays.copyOf(source, size - i - 1);
+//                size--;
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     @Override
     public void sort() {
-
+        Arrays.sort(source, 0, size);
     }
 
     @Override
     public void sort(Comparator<T> comparator) {
-
+        Arrays.sort((T[]) source, 0, size, comparator);
     }
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<T>() {
+
+            int currentIndexOfNumber;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndexOfNumber < size;
+            }
+
+            @Override
+            public T next() {
+                T res = (T) source[currentIndexOfNumber];
+                currentIndexOfNumber++;
+                return res;
+            }
+        };
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OurArrayList)) return false;
+        OurArrayList<?> that = (OurArrayList<?>) o;
+        return DEFAULT_CAPACITY == that.DEFAULT_CAPACITY &&
+                size == that.size &&
+                Arrays.equals(source, that.source);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(DEFAULT_CAPACITY, size);
+        result = 31 * result + Arrays.hashCode(source);
+        return result;
     }
 }
