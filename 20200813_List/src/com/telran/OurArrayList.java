@@ -44,7 +44,7 @@ public class OurArrayList<T> implements OurList<T> {
 
     @Override
     public void set(int index, T elt) {
-        if(index >= size || index < 0)
+        if (index >= size || index < 0)
             throw new IndexOutOfBoundsException();
 
         source[index] = elt;
@@ -52,7 +52,7 @@ public class OurArrayList<T> implements OurList<T> {
 
     @Override
     public T get(int index) {
-        if(index >= size || index < 0)
+        if (index >= size || index < 0)
             throw new IndexOutOfBoundsException();
 
         return (T) source[index];
@@ -73,9 +73,9 @@ public class OurArrayList<T> implements OurList<T> {
 //        return false;
 //    }
 
-    private int getIndex(T elt){
+    private int getIndex(T elt) {
         for (int i = 0; i < size; i++) {
-            if(elt.equals(source[i]))
+            if (elt.equals(source[i]))
                 return i;
         }
         return -1;
@@ -83,11 +83,11 @@ public class OurArrayList<T> implements OurList<T> {
 
     @Override
     public T remove(int index) {
-        if(index >= size || index < 0)
+        if (index >= size || index < 0)
             throw new IndexOutOfBoundsException();
 
         T result = (T) source[index];
-        source = Arrays.copyOf(source, size - index -1);
+        source = Arrays.copyOf(source, size - index - 1);
         size--;
 
         return result;
@@ -97,7 +97,7 @@ public class OurArrayList<T> implements OurList<T> {
     public boolean remove(T elt) {
         int index = getIndex(elt);
 
-        if(index == -1)
+        if (index == -1)
             return false;
 
         remove(index);
@@ -128,22 +128,38 @@ public class OurArrayList<T> implements OurList<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+//        return new Iterator<T>() {
+//
+//            int currentIndexOfNumber;
+//
+//            @Override
+//            public boolean hasNext() {
+//                return currentIndexOfNumber < size;
+//            }
+//
+//            @Override
+//            public T next() {
+//                T res = (T) source[currentIndexOfNumber];
+//                currentIndexOfNumber++;
+//                return res;
+//            }
+//        };
+        return new DefaultIterator();
+    }
 
-            int currentIndexOfNumber;
+    class DefaultIterator implements Iterator<T>{
 
-            @Override
-            public boolean hasNext() {
-                return currentIndexOfNumber < size;
-            }
+        int currentIndexOfNumber;
 
-            @Override
-            public T next() {
-                T res = (T) source[currentIndexOfNumber];
-                currentIndexOfNumber++;
-                return res;
-            }
-        };
+        @Override
+        public boolean hasNext() {
+            return currentIndexOfNumber < size;
+        }
+
+        @Override
+        public T next() {
+            return (T) source[currentIndexOfNumber++];
+        }
     }
 
     @Override

@@ -209,9 +209,9 @@ class OurArrayListTest {
     void testAdd_onePoint_containsExistingPoint() {
         OurArrayList<Point2D> pointList = new OurArrayList<>();
 
-        pointList.add(new Point2D(1,1));
+        pointList.add(new Point2D(1, 1));
 
-        Point2D expected = new Point2D(1,1);
+        Point2D expected = new Point2D(1, 1);
         assertTrue(pointList.contains(expected));
     }
 
@@ -233,11 +233,11 @@ class OurArrayListTest {
     @Test
     void testGet_IndexOutOfBoundsException() {
         ourArrayList.add(1);
-        assertThrows(IndexOutOfBoundsException.class,() -> ourArrayList.get(1));
+        assertThrows(IndexOutOfBoundsException.class, () -> ourArrayList.get(1));
     }
 
     @Test
-    public void testArrayIterator(){
+    public void testArrayIterator() {
 
         ourArrayList.add(2);
         ourArrayList.add(-1);
@@ -255,7 +255,7 @@ class OurArrayListTest {
         expected.add(89);
 
         Iterator<Integer> it = ourArrayList.iterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             int num = it.next();
             afterIteration.add(num);
         }
@@ -311,5 +311,27 @@ class OurArrayListTest {
 
         ourArrayList.sort(comparator);
         assertEquals(9, ourArrayList.get(8));
+    }
+
+    @Test
+    void testSortWithComparator_Point2DList_sortedList() {
+        OurList<Point2D> expected = new OurArrayList<>();
+        expected.add(new Point2D(0, 1));
+        expected.add(new Point2D(1, 1));
+        expected.add(new Point2D(4, 4));
+        expected.add(new Point2D(3, 7));
+        expected.add(new Point2D(16, 3));
+
+        OurList<Point2D> pointList = new OurArrayList<>();
+        pointList.add(new Point2D(4, 4));
+        pointList.add(new Point2D(1, 1));
+        pointList.add(new Point2D(0, 1));
+        pointList.add(new Point2D(16, 3));
+        pointList.add(new Point2D(3, 7));
+
+        pointList.sort(new Point2DComparator());
+        for (int i = 0; i < pointList.size(); i++) {
+            assertEquals(expected.get(i), pointList.get(i));
+        }
     }
 }
