@@ -22,14 +22,18 @@ public class OperationStorage {
      * The method fills operationByName object
      * @param paths of the operation to initialize
      */
-    public void init (List<String> paths) throws ClassNotFoundException,
-            NoSuchMethodException,
-            IllegalAccessException,
-            InvocationTargetException, InstantiationException {
+    public void init (List<String> paths) throws ClassNotFoundException, OperationStorageInstantiationException{
+        operationByName = new HashMap<>();
 
-        for (String path : paths){
-            StringOperation operation = (StringOperation) Class.forName(path)
-                    .getConstructor().newInstance();
+        try {
+            for (String path : paths){
+                StringOperation operation = (StringOperation) Class.forName(path)
+                        .getConstructor().newInstance();
+                operationByName.put(operation.getOperationName(), operation);
+            }
+        } catch (NoSuchMethodException | IllegalAccessException |
+                InvocationTargetException | InstantiationException e){
+            throw new OperationStorageInstantiationException(e.getMessage(), e);
         }
     }
 

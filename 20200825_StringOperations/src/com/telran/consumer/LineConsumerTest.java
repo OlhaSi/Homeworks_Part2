@@ -7,6 +7,7 @@ import org.mockito.stubbing.OngoingStubbing;
 
 import java.io.PrintWriter;
 import java.util.concurrent.BlockingQueue;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -137,5 +138,8 @@ class LineConsumerTest {
 
         assertEquals(expected, lineConsumer.processLine(toProcess));
     }
+
+    Function<Double, Double> sqrt = (Double a) -> Math.sqrt(a);
+//    Function<Double, Double> sqrt1 = a -> Math.sqrt(a);
 
 }

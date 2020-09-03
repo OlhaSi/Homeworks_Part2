@@ -1,10 +1,6 @@
-ksjfksf
-sfknjf
-sdngn
-sfjd
+ksjfksf#lowerCase
+sfknjf#upperCase
+sdngn#reverse
+sfjd#nsmfjsdn
 wjfjf
-stop_
-sjfjsf
-sbfjsf
-sjhbfjhs
-sffg
+
