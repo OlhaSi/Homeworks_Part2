@@ -10,7 +10,7 @@ public class Tarakan implements Runnable {
 
     String name;
     int stepsNum;
-    List<Score> scores;
+    final List<Score> scores;
     Random r = new Random(FASTEST_STEP);
 
     public Tarakan(String name, int stepsNum, List<Score> scores) {
@@ -31,7 +31,13 @@ public class Tarakan implements Runnable {
             }
         }
 
-        long finish = System.currentTimeMillis();
-        scores.add(new Score(name, (int) (finish - start)));
+        long finish;
+        synchronized (scores){
+            finish = System.currentTimeMillis();
+        }
+
+        synchronized (scores){
+            scores.add(new Score(name, (int) (finish - start)));
+        }
     }
 }

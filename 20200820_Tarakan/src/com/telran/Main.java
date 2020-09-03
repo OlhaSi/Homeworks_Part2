@@ -38,5 +38,10 @@ public class Main {
 
         System.out.println(scoreList);
 
+        int i = 1;
+        for (Score score: scoreList){
+            System.out.println(String.format("%d, %s finished for %d", i++, score.getName(), score.getDuration()));
+        }
+
     }
 }
