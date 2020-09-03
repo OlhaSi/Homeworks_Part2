@@ -228,4 +228,21 @@ class OurArrayDequeTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    public void testIterable(){
+        ourArrayDeque = new OurArrayDeque<>(2);
+
+        ourArrayDeque.addFirst(8);
+        ourArrayDeque.addLast(3);
+
+        List<Integer> result = new ArrayList<>();
+        List<Integer> expected = Arrays.asList(8, 3);
+
+        for (int num : ourArrayDeque) {
+            result.add(num);
+        }
+
+        assertEquals(expected, result);
+    }
+
 }

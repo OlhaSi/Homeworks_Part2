@@ -9,18 +9,18 @@ public class ReversedOurArrayDequeIterator<T> implements Iterator<T> {
 
     public ReversedOurArrayDequeIterator(OurArrayDeque<T> toIterate) {
         this.toIterate = toIterate;
-        currentIndexNumber = toIterate.size;
+        currentIndexNumber = toIterate.size - 1;
     }
 
 
     @Override
     public boolean hasNext() {
-        return currentIndexNumber > 0;
+        return currentIndexNumber >= 0;
     }
 
     @Override
     public T next() {
-        int indexInSourceToReturn = (toIterate.firstElementId + currentIndexNumber - 1) % toIterate.capacity;
+        int indexInSourceToReturn = (toIterate.firstElementId + currentIndexNumber) % toIterate.capacity;
         T res = (T) toIterate.source[indexInSourceToReturn];
         currentIndexNumber--;
         return res;
