@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -8,6 +9,25 @@ import java.util.stream.LongStream;
 public class Main {
 
     public static void main(String[] args) {
+
+        TernaryPredicate classicPredicate = new DifferentNumbersPredicate();
+        classicPredicate.test(1,2,3);
+
+        TernaryPredicate lambdaPredicate = (a, b, c) -> a != b && b != c && c != a;
+
+        System.out.println(lambdaPredicate.test(1,2,3));
+        System.out.println(lambdaPredicate.test(1,3,3));
+
+        Function<Integer,Integer> f = x -> x * 2;
+        Function<Integer,Integer> g = x -> x + 3;
+        Function<Integer,Integer> fAndGComposition = f.compose(g);
+        // the same
+        Function<Integer,Integer> fAndGComposition1 = f.andThen(g);
+        System.out.println(fAndGComposition.apply(4));
+        g.compose(f);
+
+
+        // homework
 
         // 1. get combined list from two Predicates list
         List<String> list = Arrays.asList("Groovy", "Jack", "Google", "Microsoft", "Java", "Kotlin");
@@ -39,6 +59,12 @@ public class Main {
     }
 
     // 2.
+
+    /**
+     *
+     * @param n > 0
+     * @return multiplication of all the numbers from 1 to n
+     */
     public static long factorial(int n) {
         return LongStream
                 .rangeClosed(1, n)
