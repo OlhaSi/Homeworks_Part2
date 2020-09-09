@@ -27,15 +27,6 @@ public class Account {
     public void setLocked(boolean locked) {
         isLocked = locked;
     }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id='" + id + '\'' +
-                ", sum=" + sum +
-                ", isLocked=" + isLocked +
-                '}';
-    }
 }
 
 
