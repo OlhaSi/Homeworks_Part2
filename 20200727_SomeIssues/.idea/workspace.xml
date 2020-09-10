@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3afa39ac-061a-4fa6-b11c-c2fd3a198de4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/Repository With Homeworks.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../20200803_FindMaxCovered/src/com/telran/MaxCoveredCut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/20200727_SomeIssues/META-INF/20200727_SomeIssues.kotlin_module" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../20200909_EveningClassesIssues/src/com/telran/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +24,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -141,6 +136,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -156,11 +152,12 @@
       <workItem from="1596127454078" duration="133000" />
       <workItem from="1596127821459" duration="186000" />
       <workItem from="1596183290187" duration="3138000" />
+      <workItem from="1599674199242" duration="264000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
     <state x="893" y="174" key="#com.intellij.ide.util.MemberChooser" timestamp="1595841110579">

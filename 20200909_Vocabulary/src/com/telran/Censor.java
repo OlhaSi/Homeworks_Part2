@@ -15,6 +15,7 @@ public class Censor {
 
     public List<String> findBadWords(String text) {
         return Arrays.stream(text.split(" "))
+                .map(input -> input.toLowerCase())
                 .filter(word -> vocabulary.contains(word))
                 .collect(Collectors.toList());
     }

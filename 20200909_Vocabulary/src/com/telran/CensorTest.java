@@ -33,7 +33,7 @@ class CensorTest {
         vocabulary.add("deque");
         vocabulary.add("treemap");
 
-        String text = "sjfjs list hfjsd set deque lkuyb";
+        String text = "sjfjs List hfjsd sEt deque lkuyb";
         List<String> expected = Arrays.asList("list", "set", "deque");
         assertEquals(expected, censor.findBadWords(text));
     }
