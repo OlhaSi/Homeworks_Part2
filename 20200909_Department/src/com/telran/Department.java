@@ -1,5 +1,7 @@
 package com.telran;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Department {
@@ -11,7 +13,7 @@ public class Department {
     public Department(String name, String code, List<Employee> employees) {
         this.name = name;
         this.code = code;
-        this.employees = employees;
+        this.employees = new ArrayList<>(employees);
     }
 
     public String getName() {
@@ -23,6 +25,6 @@ public class Department {
     }
 
     public List<Employee> getEmployees() {
-        return employees;
+        return Collections.unmodifiableList(employees);
     }
 }
