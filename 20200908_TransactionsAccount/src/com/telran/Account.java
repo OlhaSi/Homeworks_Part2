@@ -1,5 +1,7 @@
 package com.telran;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Account {
@@ -11,7 +13,7 @@ public class Account {
     public Account(String uniq, long balance, List<Transaction> transactions) {
         this.uuid = uniq;
         this.balance = balance;
-        this.transactions = transactions;
+        this.transactions = new ArrayList<>(transactions);
     }
 
     public String getUniq() {
@@ -23,6 +25,6 @@ public class Account {
     }
 
     public List<Transaction> getTransactions() {
-        return transactions;
+        return Collections.unmodifiableList(transactions);
     }
 }
