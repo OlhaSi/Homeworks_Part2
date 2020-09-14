@@ -26,7 +26,8 @@ class LogEntryServiceTest {
 
     @Test
     public void testGetEntriesAmount_1() {
-        List<LogEntry> logEntries = Arrays.asList(new LogEntry("Dan", "punkt.com"),
+        List<LogEntry> logEntries = Arrays.asList(
+                new LogEntry("Dan", "punkt.com"),
                 new LogEntry("Kate", "com.com"),
                 new LogEntry("Mary", "u.ua"));
         Map<String, Long> expected = new HashMap<>();
@@ -39,7 +40,8 @@ class LogEntryServiceTest {
 
     @Test
     public void testGetEntriesAmount_2() {
-        List<LogEntry> logEntries = Arrays.asList(new LogEntry("Dan", "punkt.com"),
+        List<LogEntry> logEntries = Arrays.asList(
+                new LogEntry("Dan", "punkt.com"),
                 new LogEntry("Kate", "com.com"),
                 new LogEntry("Mary", "u.ua"),
                 new LogEntry("Jane", "u.ua"));
@@ -54,9 +56,9 @@ class LogEntryServiceTest {
     @Test
     public void testGetUniqueUsersByUrl_zero() {
         List<LogEntry> logEntries = Collections.emptyList();
-        Map<String, List<LogEntry>> expected = Collections.emptyMap();
+        Map<String, Integer> expected = Collections.emptyMap();
 
-        assertEquals(expected, logEntryService.getUniqueUsersByUrl(logEntries));
+        assertEquals(expected, logEntryService.getUniqueUsersNumberByUrl(logEntries));
     }
 
     @Test
@@ -64,10 +66,10 @@ class LogEntryServiceTest {
         LogEntry l1 = new LogEntry("Dan", "punkt.com");
         List<LogEntry> logEntries = Collections.singletonList(l1);
 
-        Map<String, List<LogEntry>> expected = new HashMap<>();
-        expected.put("punkt.com", logEntries);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("punkt.com", 1);
 
-        assertEquals(expected, logEntryService.getUniqueUsersByUrl(logEntries));
+        assertEquals(expected, logEntryService.getUniqueUsersNumberByUrl(logEntries));
     }
 
     @Test
@@ -76,10 +78,10 @@ class LogEntryServiceTest {
         LogEntry l2 = new LogEntry("Daniel", "punkt.com");
         List<LogEntry> logEntries = Arrays.asList(l1, l2);
 
-        Map<String, List<LogEntry>> expected = new HashMap<>();
-        expected.put("punkt.com", logEntries);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("punkt.com", 2);
 
-        assertEquals(expected, logEntryService.getUniqueUsersByUrl(logEntries));
+        assertEquals(expected, logEntryService.getUniqueUsersNumberByUrl(logEntries));
     }
 
     @Test
@@ -90,24 +92,20 @@ class LogEntryServiceTest {
         LogEntry l4 = new LogEntry("Mary", "u.ua");
         List<LogEntry> logEntries = Arrays.asList(l1, l2, l3, l4);
 
-        Map<String, List<LogEntry>> expected = new HashMap<>();
-        List<LogEntry> list1 = Arrays.asList(l1, l2);
-        List<LogEntry> list2 = Collections.singletonList(l3);
-        List<LogEntry> list3 = Collections.singletonList(l4);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("punkt.com", 2);
+        expected.put("com.com", 1);
+        expected.put("u.ua", 1);
 
-        expected.put("punkt.com", list1);
-        expected.put("com.com", list2);
-        expected.put("u.ua", list3);
-
-        assertEquals(expected, logEntryService.getUniqueUsersByUrl(logEntries));
+        assertEquals(expected, logEntryService.getUniqueUsersNumberByUrl(logEntries));
     }
 
     @Test
     public void testGetUniqueUrlsByUser_zero() {
         List<LogEntry> logEntries = Collections.emptyList();
-        Map<String, List<LogEntry>> expected = Collections.emptyMap();
+        Map<String, Integer> expected = Collections.emptyMap();
 
-        assertEquals(expected, logEntryService.getUniqueUrlsByUser(logEntries));
+        assertEquals(expected, logEntryService.getUniqueUrlNumberByUser(logEntries));
     }
 
     @Test
@@ -115,10 +113,10 @@ class LogEntryServiceTest {
         LogEntry l1 = new LogEntry("Dan", "punkt.com");
         List<LogEntry> logEntries = Collections.singletonList(l1);
 
-        Map<String, List<LogEntry>> expected = new HashMap<>();
-        expected.put("Dan", logEntries);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("Dan", 1);
 
-        assertEquals(expected, logEntryService.getUniqueUrlsByUser(logEntries));
+        assertEquals(expected, logEntryService.getUniqueUrlNumberByUser(logEntries));
     }
 
     @Test
@@ -127,10 +125,10 @@ class LogEntryServiceTest {
         LogEntry l2 = new LogEntry("Dan", "punkt1.com");
         List<LogEntry> logEntries = Arrays.asList(l1, l2);
 
-        Map<String, List<LogEntry>> expected = new HashMap<>();
-        expected.put("Dan", logEntries);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("Dan", 2);
 
-        assertEquals(expected, logEntryService.getUniqueUrlsByUser(logEntries));
+        assertEquals(expected, logEntryService.getUniqueUrlNumberByUser(logEntries));
     }
 
     @Test
@@ -141,15 +139,58 @@ class LogEntryServiceTest {
         LogEntry l4 = new LogEntry("Mary", "u.ua");
         List<LogEntry> logEntries = Arrays.asList(l1, l2, l3, l4);
 
-        Map<String, List<LogEntry>> expected = new HashMap<>();
-        List<LogEntry> list1 = Arrays.asList(l1, l2);
-        List<LogEntry> list2 = Collections.singletonList(l3);
-        List<LogEntry> list3 = Collections.singletonList(l4);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("Dan", 2);
+        expected.put("Kate", 1);
+        expected.put("Mary", 1);
 
-        expected.put("Dan", list1);
-        expected.put("Kate", list2);
-        expected.put("Mary", list3);
+        assertEquals(expected, logEntryService.getUniqueUrlNumberByUser(logEntries));
+    }
 
-        assertEquals(expected, logEntryService.getUniqueUrlsByUser(logEntries));
+    @Test
+    public void testGetUniqueUsersByUrlCustomCollector_zero() {
+        List<LogEntry> logEntries = Collections.emptyList();
+        Map<String, Integer> expected = Collections.emptyMap();
+
+        assertEquals(expected, logEntryService.getUniqueUsersNumberByUrlCustomCollector(logEntries));
+    }
+
+    @Test
+    public void testGetUniqueUsersByUrlCustomCollector_1() {
+        LogEntry l1 = new LogEntry("Dan", "punkt.com");
+        List<LogEntry> logEntries = Collections.singletonList(l1);
+
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("punkt.com", 1);
+
+        assertEquals(expected, logEntryService.getUniqueUsersNumberByUrlCustomCollector(logEntries));
+    }
+
+    @Test
+    public void testGetUniqueUsersByUrlCustomCollector_2() {
+        LogEntry l1 = new LogEntry("Dan", "punkt.com");
+        LogEntry l2 = new LogEntry("Daniel", "punkt.com");
+        List<LogEntry> logEntries = Arrays.asList(l1, l2);
+
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("punkt.com", 2);
+
+        assertEquals(expected, logEntryService.getUniqueUsersNumberByUrlCustomCollector(logEntries));
+    }
+
+    @Test
+    public void testGetUniqueUsersByUrlCustomCollector_3() {
+        LogEntry l1 = new LogEntry("Dan", "punkt.com");
+        LogEntry l2 = new LogEntry("Daniel", "punkt.com");
+        LogEntry l3 = new LogEntry("Kate", "com.com");
+        LogEntry l4 = new LogEntry("Mary", "u.ua");
+        List<LogEntry> logEntries = Arrays.asList(l1, l2, l3, l4);
+
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("punkt.com", 2);
+        expected.put("com.com", 1);
+        expected.put("u.ua", 1);
+
+        assertEquals(expected, logEntryService.getUniqueUsersNumberByUrlCustomCollector(logEntries));
     }
 }
