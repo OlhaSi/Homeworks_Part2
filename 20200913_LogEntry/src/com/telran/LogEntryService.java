@@ -2,24 +2,50 @@ package com.telran;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public class LogEntryService {
 
     public Map<String, Long> getEntriesAmount(List<LogEntry> logEntries) {
         return logEntries.stream()
-                .collect(Collectors.groupingBy(LogEntry::getUrl,
-                        Collectors.counting()));
+                .collect(groupingBy(LogEntry::getUrl,
+                        counting()));
     }
 
-    public Map<String, List<LogEntry>> getUniqueUsersByUrl(List<LogEntry> logEntries) {
+    // my version
+//    public Map<String, List<LogEntry>> getUniqueUsersByUrl(List<LogEntry> logEntries) {
+//        return logEntries.stream()
+//                .collect(groupingBy(LogEntry::getUrl));
+//    }
+
+    // how it should be
+    public Map<String, Integer> getUniqueUsersNumberByUrl(List<LogEntry> logEntries) {
         return logEntries.stream()
-                .collect(Collectors.groupingBy(LogEntry::getUrl));
+                .collect(groupingBy(LogEntry::getUrl,
+                        mapping(LogEntry::getUsername,
+                                collectingAndThen(toSet(), Set::size))));
     }
 
-    public Map<String, List<LogEntry>> getUniqueUrlsByUser(List<LogEntry> logEntries) {
+    // realisation using custom collector
+    public Map<String, Integer> getUniqueUsersNumberByUrlCustomCollector(List<LogEntry> logEntries) {
         return logEntries.stream()
-                .collect(Collectors.groupingBy(LogEntry::getUsername));
+                .collect(groupingBy(LogEntry::getUrl, new CustomCollectorLogEntry()));
     }
 
+    // my version
+//    public Map<String, List<LogEntry>> getUniqueUrlsByUser(List<LogEntry> logEntries) {
+//        return logEntries.stream()
+//                .collect(groupingBy(LogEntry::getUrl));
+//    }
+
+    // how it should be
+    public Map<String, Integer> getUniqueUrlNumberByUser(List<LogEntry> logEntries) {
+        return logEntries.stream()
+                .collect(groupingBy(LogEntry::getUsername,
+                        mapping(LogEntry::getUrl,
+                                collectingAndThen(toSet(), Set::size))));
+    }
 }
