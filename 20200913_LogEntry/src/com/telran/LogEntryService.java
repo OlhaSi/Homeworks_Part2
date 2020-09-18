@@ -3,6 +3,7 @@ package com.telran;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
@@ -47,5 +48,16 @@ public class LogEntryService {
                 .collect(groupingBy(LogEntry::getUsername,
                         mapping(LogEntry::getUrl,
                                 collectingAndThen(toSet(), Set::size))));
+    }
+
+    // general collector
+    public Map<String, Integer> getUniqueUsersNumberByUrlDistinct(List<LogEntry> logs) {
+
+        Function<LogEntry, String> getUsername = LogEntry::getUsername;
+        DistinctCountingBy<LogEntry, String> countingBy = new DistinctCountingBy<>(getUsername);
+
+        return logs.stream()
+                .collect(groupingBy(LogEntry::getUrl, countingBy
+                ));
     }
 }
