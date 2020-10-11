@@ -11,6 +11,8 @@ public class ShapeService {
 
     public void drawShapes(@Autowired List<Shape> shapes) {
         //System.out.println(shapes.size());
+        System.out.println("---------------------");
         shapes.stream().forEach(Shape::draw);
+        System.out.println("---------------------");
     }
 }

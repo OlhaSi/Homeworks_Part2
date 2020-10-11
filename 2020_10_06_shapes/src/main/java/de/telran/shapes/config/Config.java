@@ -1,6 +1,7 @@
 package de.telran.shapes.config;
 
 import de.telran.shapes.model.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,11 +11,13 @@ import java.util.Arrays;
 public class Config {
 
     @Bean
+    @Qualifier("simpleShapes")
     public Line line1() {
         return new Line(10, '*');
     }
 
     @Bean
+    @Qualifier("simpleShapes")
     public Rectangle rectangle() {
         return new Rectangle(7, 5, 'o');
     }
