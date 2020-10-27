@@ -1,6 +1,5 @@
 package de.telran.person.service;
 
-import de.telran.person.exception.PersonNotFoundException;
 import de.telran.person.model.Person;
 import de.telran.person.repo.IPersonRepo;
 import org.junit.jupiter.api.BeforeEach;
