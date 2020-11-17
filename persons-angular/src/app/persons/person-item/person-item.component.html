@@ -1,0 +1,13 @@
+<div class="person-item">
+  <a class="person-details-link" data-action="toggleDetails">{{person.name}} {{person.secondName}}</a>
+
+  <div>
+    <a class="blue-text" (click)="onEdit(person)">
+      <i class="material-icons" data-action="edit">edit</i>
+    </a>
+
+    <a class="red-text" (click)="onDelete()">
+      <i class="material-icons" data-action="remove">delete</i>
+    </a>
+  </div>
+</div>
