@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col s6 offset-s3">
+    <h3>Persons</h3>
+
+    <div class="collection-header">
+      <app-person-form (personCreated)="onPersonCreated($event)"></app-person-form>
+    </div>
+
+    <ul class="collection with-header" id="persons-wrapper">
+
+      <!--the template for persons-->
+      <li *ngFor="let person of persons" class="collection-item" id="person-template">
+        <app-person-item [person]="person" (personToRemove)="onPersonToRemove($event)"></app-person-item>
+      </li>
+
+    </ul>
+  </div>
+</div>
