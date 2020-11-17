@@ -12,7 +12,6 @@
       <li *ngFor="let person of persons" class="collection-item" id="person-template">
         <app-person-item [person]="person" (personToRemove)="onPersonToRemove($event)"></app-person-item>
       </li>
-
     </ul>
   </div>
 </div>
