@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 import {Person} from '../../model/person';
 import {PersonService} from '../../service/person.service';
 import {EventEmitter} from '@angular/core';
+import {EventService} from '../../service/event.service';
 
 @Component({
   selector: 'app-person-item',
@@ -16,7 +17,7 @@ export class PersonItemComponent implements OnInit {
   @Output()
   personToRemove = new EventEmitter<Person>();
 
-  constructor(private personService: PersonService) {
+  constructor(private personService: PersonService, private eventService: EventService) {
   }
 
   ngOnInit(): void {
@@ -30,6 +31,6 @@ export class PersonItemComponent implements OnInit {
   }
 
   onEdit(person: Person): void {
-
+    this.eventService.addPersonToEdit(this.person);
   }
 }
