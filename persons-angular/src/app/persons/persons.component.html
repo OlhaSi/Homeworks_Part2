@@ -3,7 +3,8 @@
     <h3>Persons</h3>
 
     <div class="collection-header">
-      <app-person-form (personCreated)="onPersonCreated($event)"></app-person-form>
+      <app-person-form (personCreated)="onPersonCreated($event)"
+                       (personEdited)="onPersonEdited()"></app-person-form>
     </div>
 
     <ul class="collection with-header" id="persons-wrapper">

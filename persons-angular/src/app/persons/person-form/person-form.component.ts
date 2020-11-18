@@ -13,6 +13,8 @@ export class PersonFormComponent implements OnInit {
 
   @Output()
   personCreated = new EventEmitter<Person>();
+  @Output()
+  personEdited = new EventEmitter<Person>();
 
   person: Person = {};
 
@@ -29,7 +31,7 @@ export class PersonFormComponent implements OnInit {
   private onPersonToEdit = personToEdit => {
     this.person = Object.assign({}, personToEdit);
     this.isEdit = true;
-  }
+  };
 
   onAdd(): void {
     this.personService.add(this.person)
@@ -39,13 +41,16 @@ export class PersonFormComponent implements OnInit {
       });
   }
 
-  onEdit(): void {
-    this.personService.edit(this.person);
+  onEditSubmit(): void {
+    this.personService.edit(this.person).subscribe(() => {
+      this.personEdited.emit(); // reload list after edit
+      this.isEdit = false;
+      this.person = {};
+    });
   }
 
   onCancel(): void {
     this.isEdit = false;
     this.person = {};
   }
-
 }

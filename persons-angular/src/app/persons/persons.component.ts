@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PersonService} from '../service/person.service';
 import {Person} from '../model/person';
 
@@ -11,7 +11,8 @@ export class PersonsComponent implements OnInit {
 
   persons: Person [] = [];
 
-  constructor(private personService: PersonService) { }
+  constructor(private personService: PersonService) {
+  }
 
   async ngOnInit(): Promise<void> {
     this.persons = await this.getPersons();
@@ -23,6 +24,10 @@ export class PersonsComponent implements OnInit {
 
   onPersonCreated(newPerson: Person): void {
     this.persons.push(newPerson);
+  }
+
+  async onPersonEdited(): Promise<void> {
+    this.persons = await this.getPersons();
   }
 
   onPersonToRemove(person: Person): void {
