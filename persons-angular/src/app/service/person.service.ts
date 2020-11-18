@@ -21,11 +21,11 @@ export class PersonService {
   add(person: Person): Observable<Person> {
     return this.httpClient.post<Person>(this.PERSONS_URI, person);
   }
-  //
-  // edit(person: Person): Observable<void> {
-  //
-  // }
-  //
+
+  edit(person: Person): void {
+    this.httpClient.put<Person>(`${this.PERSONS_URI}/${person.id}`, person);
+  }
+
   remove(person: Person): Observable<Person> {
     return this.httpClient.delete<Person>(`${this.PERSONS_URI}/${person.id}`);
   }
