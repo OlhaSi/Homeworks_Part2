@@ -5,6 +5,8 @@ import de.telran.person.model.Person;
 import de.telran.person.service.PersonService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +30,7 @@ public class PersonController {
     public List<PersonDto> getAll() {
         List<Person> persons = personService.getAll();
         return persons.stream()
+                .sorted(Comparator.comparingInt(Person::getId))
                 .map(person -> new PersonDto(person.getId(), person.getName(), person.getSecondName(), person.getAge()))
                 .collect(Collectors.toList());
     }
