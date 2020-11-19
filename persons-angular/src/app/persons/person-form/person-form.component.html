@@ -1,11 +1,12 @@
 <form class="row" id="person-form">
   <input type="hidden" name="id" [(ngModel)]="person.id">
+  <div class="row"></div>
 
   <div class="input-field col s2">
     <a *ngIf="isEdit" style="float: left; margin-top: 15px; margin-right: 5px;"
        (click)="onEditSubmit()"
-       class="btn-floating btn-large waves-effect waves-light blue" id="edit-button">
-      <i class="material-icons" data-action="edit">edit</i>
+       class="btn-floating btn-large waves-effect waves-light btn" id="edit-button">
+      <i class="material-icons" data-action="edit">done</i>
     </a>
 
     <a *ngIf="isEdit" style="float: left; margin-top: 15px;"
@@ -16,7 +17,7 @@
 
     <a *ngIf="!isEdit" style="float: left; margin-top: 15px;"
        (click)="onAdd()"
-       class="btn-floating btn-large waves-effect waves-light blue" id="add-button">
+       class="btn-floating btn-large waves-effect waves-light" id="add-button">
       <i class="material-icons" data-action="add">add</i>
     </a>
   </div>

@@ -31,8 +31,8 @@ export class PersonService {
     return this.httpClient.delete<Person>(`${this.PERSONS_URI}/${person.id}`);
   }
 
-  //
-  // get(id: number): Observable<Person> {
-  //
-  // }
+
+  get(id: number): Observable<Person> {
+    return this.httpClient.get<Person>(`${this.PERSONS_URI}/${id}`);
+  }
 }

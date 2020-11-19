@@ -1,8 +1,10 @@
 <div class="person-item">
-  <a class="person-details-link" data-action="toggleDetails">{{person.name}} {{person.secondName}}</a>
+  <a routerLink="/persons/{{person.id}}"
+     class="blue-grey-text text-darken-4 text-darken-3 person-details-link"
+     data-action="toggleDetails">{{person.name}} {{person.secondName}}</a>
 
   <div>
-    <a class="blue-text" (click)="onEdit(person)">
+    <a class="teal-text text-lighten-3" (click)="onEdit(person)">
       <i class="material-icons" data-action="edit">edit</i>
     </a>
 

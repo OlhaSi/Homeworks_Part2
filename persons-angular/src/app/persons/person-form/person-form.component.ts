@@ -31,7 +31,7 @@ export class PersonFormComponent implements OnInit {
   private onPersonToEdit = personToEdit => {
     this.person = Object.assign({}, personToEdit);
     this.isEdit = true;
-  };
+  }
 
   onAdd(): void {
     this.personService.add(this.person)
